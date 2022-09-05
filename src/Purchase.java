@@ -6,20 +6,30 @@ public class Purchase {
 
     String id;
     String name;
-    Date date;
+    String date;
     ArrayList<Item> items;
     boolean isPaid;
     int debtCents;
 
-    public Purchase(String id, String name, Date date, ArrayList<Item> items, boolean isPaid, int debtCents) {
+    public Purchase(String name, String date, ArrayList<Item> items) {
         ++numPurchases;
-
-        this.id = id;
+        this.id = String.valueOf(numPurchases);
         this.name = name;
         this.date = date;
         this.items = items;
-        this.isPaid = isPaid;
-        this.debtCents = debtCents;
+        this.isPaid = checkIfPaid();
+        this.debtCents = calculateItemDebtSum();
+    }
+
+    boolean checkIfPaid() {
+        boolean isPaid = true;
+        for (Item item: this.items) {
+            if (!item.isPaid()) {
+                isPaid = false;
+                break;
+            }
+        }
+        return isPaid;
     }
 
     int calculateItemDebtSum() {

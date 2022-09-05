@@ -6,13 +6,13 @@ public class Item {
     boolean isPaid;
     int debtCents;
 
-    public Item(String name, int unitPriceCents, String unitType, int owedUnitQuantity, boolean isPaid, int debtCents) {
+    public Item(String name, int unitPriceCents, String unitType, int owedUnitQuantity, boolean isPaid) {
         this.name = name;
         this.unitPriceCents = unitPriceCents;
         this.unitType = unitType;
         this.owedUnitQuantity = owedUnitQuantity;
         this.isPaid = isPaid;
-        this.debtCents = debtCents;
+        this.debtCents = unitPriceCents * owedUnitQuantity;
     }
 
     void printItem(int indent) {
@@ -28,5 +28,9 @@ public class Item {
 
     void printItem() {
         printItem(0); // default parameter for `indent`
+    }
+
+    boolean isPaid() {
+        return this.isPaid;
     }
 }
